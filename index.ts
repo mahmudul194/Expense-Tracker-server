@@ -34,3 +34,12 @@ expenseSchema.set('toJSON', {
 const Expense = mongoose.model('Expense', expenseSchema);
 
 // --- ROUTES ---
+// 1. Get all expenses
+app.get('/api/expenses', async (req: Request, res: Response) => {
+  try {
+    const expenses = await Expense.find();
+    res.json(expenses);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch expenses." });
+  }
+});
