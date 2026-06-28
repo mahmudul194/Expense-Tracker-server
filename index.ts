@@ -22,3 +22,15 @@ const expenseSchema = new mongoose.Schema({
   category: { type: String, required: true },
   date: { type: String, required: true }
 });
+// Transform _id to id so the frontend doesn't break
+expenseSchema.set('toJSON', {
+  transform: (doc, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+  }
+});
+
+const Expense = mongoose.model('Expense', expenseSchema);
+
+// --- ROUTES ---
