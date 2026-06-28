@@ -10,3 +10,5 @@ import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
+// Connect to MongoDB
+const MONGODB_URI = process.env.MONGODB_URI || '';
