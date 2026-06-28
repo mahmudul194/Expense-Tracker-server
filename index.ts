@@ -12,3 +12,6 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 // Connect to MongoDB
 const MONGODB_URI = process.env.MONGODB_URI || '';
+mongoose.connect(MONGODB_URI)
+  .then(() => console.log('Connected to MongoDB!'))
+  .catch(err => console.error('Failed to connect to MongoDB:', err));
