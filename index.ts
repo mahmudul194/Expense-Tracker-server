@@ -61,3 +61,16 @@ app.post('/api/expenses', async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to create expense." });
   }
 });
+// 3. Update an expense
+app.put('/api/expenses/:id', async (req: Request, res: Response) => {
+  try {
+    const idToFind = req.params.id;
+    const updatedExpense = await Expense.findByIdAndUpdate(idToFind, req.body, { new: true });
+    if (!updatedExpense) {
+      return res.status(404).json({ error: "We could not find that expense." });
+    }
+    res.json(updatedExpense);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update expense." });
+  }
+});
