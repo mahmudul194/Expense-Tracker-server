@@ -43,3 +43,21 @@ app.get('/api/expenses', async (req: Request, res: Response) => {
     res.status(500).json({ error: "Failed to fetch expenses." });
   }
 });
+// 2. Add a new expense
+app.post('/api/expenses', async (req: Request, res: Response) => {
+  try {
+    const { title, amount, category, date } = req.body;
+    if (!title || !amount || !category || !date) {
+      return res.status(400).json({ error: "Please provide title, amount, category, and date." });
+    }
+    const newExpense = await Expense.create({
+      title,
+      amount: Number(amount),
+      category,
+      date
+    });
+    res.status(201).json(newExpense);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to create expense." });
+  }
+});
