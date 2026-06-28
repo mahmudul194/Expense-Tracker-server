@@ -6,3 +6,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 import cors from 'cors';
 app.use(cors());
+import mongoose from 'mongoose';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
